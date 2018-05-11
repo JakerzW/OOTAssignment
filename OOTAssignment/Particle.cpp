@@ -12,10 +12,10 @@ Particle::~Particle()
 
 int Particle::GetPosX()
 {
-
+	return xPos;
 }
 
 int Particle::GetPosY()
 {
-
+	return yPos;
 }
