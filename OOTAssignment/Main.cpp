@@ -7,6 +7,9 @@ const int SCREEN_HEIGHT = 600;
 const int SCREEN_POSX = 50;
 const int SCREEN_POSY = 50;
 
+//Declare all the functions
+void Delay(int seconds);
+
 int main(int argc, char* args[])
 {
 	//Defining the window we will render to
@@ -38,16 +41,36 @@ int main(int argc, char* args[])
 			//Get the window's surface
 			screenSurface = SDL_GetWindowSurface(window);
 
-			//Fill the surface in as white
-			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
+			//Fill the surface in as black
+			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0, 0, 0));
 
 			//Update the surface
-			SDL_UpdateWindowSurface(window);
-
-			//Wait two seconds
-			SDL_Delay(2000);
+			SDL_UpdateWindowSurface(window);			
 		}
 	}
+
+	//Set the boolean to check if the program should exit
+	bool ProgramActive = true;
+
+	while (ProgramActive)
+	{
+		SDL_Event inputEvent;
+
+		while (SDL_PollEvent(&inputEvent))
+		{
+			switch (inputEvent.type)
+			{
+				case SDL_KEYDOWN:
+				{
+					case SDLK_ESCAPE:
+						ProgramActive = false;
+				}
+			}
+		}
+	}
+
+	//Wait two seconds
+	Delay(2);
 
 	//Destroy window
 	SDL_DestroyWindow(window);
@@ -56,4 +79,10 @@ int main(int argc, char* args[])
 	SDL_Quit();
 
 	return 0;
+}
+
+//Enter the number of seconds to delay the program
+void Delay(int seconds)
+{
+	SDL_Delay(seconds * 1000);
 }
