@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SDL.h>
 #include <stdio.h>
+#include <SDL_ttf.h>
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
@@ -22,6 +23,11 @@ int main(int argc, char* args[])
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		std::cout << "SDL could not initialise." << std::endl;
+		return -1;
+	}
+	if (TTF_Init() < 0)
+	{
+		std::cout << "TTF could not initialise." << std::endl;
 		return -1;
 	}
 
