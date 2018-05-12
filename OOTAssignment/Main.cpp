@@ -9,7 +9,7 @@ const int SCREEN_POSX = 50;
 const int SCREEN_POSY = 50;
 
 //Declare all the functions
-void Delay(int seconds);
+void Delay(float seconds);
 
 int main(int argc, char* args[])
 {
@@ -22,7 +22,7 @@ int main(int argc, char* args[])
 	//Defining the surface contained by the window
 	SDL_Surface* screenSurface = NULL;	
 	
-	//Defining surface to hold text
+	/*//Defining surface to hold text
 	SDL_Surface* textSurface = NULL;
 
 	//Defining the texture used to create the text
@@ -32,7 +32,11 @@ int main(int argc, char* args[])
 	TTF_Font* font = TTF_OpenFont("Arial.ttf", 25);
 
 	//Defining the font colour
-	SDL_Color fontColour = { 255, 255, 255 };
+	SDL_Color fontBGColour = { 255, 255, 255 };
+	SDL_Color fontFGColour = { 0, 0, 255 };
+
+	textSurface = TTF_RenderText_Shaded(font, "This is my text.", fontFGColour, fontFGColour);
+	SDL_Rect textLocation = { 50, 50, 0, 0 }; */
 
 	//Exit the program if SDL cannot be initialised
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -49,12 +53,23 @@ int main(int argc, char* args[])
 	//If no error occurs, carry on with defining the window
 	else
 	{
-		window = SDL_CreateWindow("Particle Program", SCREEN_POSX, SCREEN_POSY, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		//Create the window
+		window = SDL_CreateWindow("Particle Program", SCREEN_POSX, SCREEN_POSY, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+
+		//Create the renderer
+		renderer = SDL_CreateRenderer(window, -1, 0);
 
 		//If the window fails to be created, exit the program
 		if (window == NULL)
 		{
 			std::cout << "Window could not be created." << std::endl;
+			return -1;
+		}
+
+		if (renderer == NULL)
+		{
+			std::cout << "Renderer could not be created." << std::endl;
+			return -1;
 		}
 
 		else
@@ -71,8 +86,11 @@ int main(int argc, char* args[])
 			//Set the boolean to check if the program should exit
 			bool ProgramActive = true;
 
+			//The main program procedure
 			while (ProgramActive)
 			{
+
+
 				SDL_Event inputEvent;
 
 				while (SDL_PollEvent(&inputEvent))
@@ -86,14 +104,19 @@ int main(int argc, char* args[])
 						}
 					}
 				}
+
+				//Enter the program text
+
+				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+				SDL_RenderDrawPoint(renderer, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+				SDL_RenderPresent(renderer);
+
 			}
 		}
-	}
-
-	
+	}	
 
 	//Wait two seconds
-	Delay(2);
+	Delay(0.5f);
 
 	//Destroy the renderer
 	SDL_DestroyRenderer(renderer);
@@ -102,13 +125,13 @@ int main(int argc, char* args[])
 	SDL_FreeSurface(screenSurface);
 
 	//Free the text surface
-	SDL_FreeSurface(textSurface);
+	//SDL_FreeSurface(textSurface);
 
 	//Destroy text texture
-	SDL_DestroyTexture(textTexture);
+	//SDL_DestroyTexture(textTexture);
 
 	//Close the font
-	TTF_CloseFont(font);
+	//TTF_CloseFont(font);
 
 	//Destroy window
 	SDL_DestroyWindow(window);
@@ -120,7 +143,7 @@ int main(int argc, char* args[])
 }
 
 //Enter the number of seconds to delay the program
-void Delay(int seconds)
+void Delay(float seconds)
 {
 	SDL_Delay(seconds * 1000);
 }
