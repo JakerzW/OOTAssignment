@@ -16,9 +16,24 @@ int main(int argc, char* args[])
 	//Defining the window we will render to
 	SDL_Window* window = NULL;
 
+	//Defining the renderer for rendering to the screen
+	SDL_Renderer* renderer = NULL;
+
 	//Defining the surface contained by the window
 	SDL_Surface* screenSurface = NULL;	
 	
+	//Defining surface to hold text
+	SDL_Surface* textSurface = NULL;
+
+	//Defining the texture used to create the text
+	SDL_Texture* textTexture = NULL;
+
+	//Defining the font used throughout the program
+	TTF_Font* font = TTF_OpenFont("Arial.ttf", 25);
+
+	//Defining the font colour
+	SDL_Color fontColour = { 255, 255, 255 };
+
 	//Exit the program if SDL cannot be initialised
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -51,32 +66,49 @@ int main(int argc, char* args[])
 			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0, 0, 0));
 
 			//Update the surface
-			SDL_UpdateWindowSurface(window);			
-		}
-	}
+			SDL_UpdateWindowSurface(window);	
 
-	//Set the boolean to check if the program should exit
-	bool ProgramActive = true;
+			//Set the boolean to check if the program should exit
+			bool ProgramActive = true;
 
-	while (ProgramActive)
-	{
-		SDL_Event inputEvent;
-
-		while (SDL_PollEvent(&inputEvent))
-		{
-			switch (inputEvent.type)
+			while (ProgramActive)
 			{
-				case SDL_KEYDOWN:
+				SDL_Event inputEvent;
+
+				while (SDL_PollEvent(&inputEvent))
 				{
-					case SDLK_ESCAPE:
-						ProgramActive = false;
+					switch (inputEvent.type)
+					{
+						case SDL_KEYDOWN:
+						{
+						case SDLK_ESCAPE:
+							ProgramActive = false;
+						}
+					}
 				}
 			}
 		}
 	}
 
+	
+
 	//Wait two seconds
 	Delay(2);
+
+	//Destroy the renderer
+	SDL_DestroyRenderer(renderer);
+
+	//Free the screen surface
+	SDL_FreeSurface(screenSurface);
+
+	//Free the text surface
+	SDL_FreeSurface(textSurface);
+
+	//Destroy text texture
+	SDL_DestroyTexture(textTexture);
+
+	//Close the font
+	TTF_CloseFont(font);
 
 	//Destroy window
 	SDL_DestroyWindow(window);

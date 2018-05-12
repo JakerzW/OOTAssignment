@@ -69,17 +69,17 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(IncludePath)</IncludePath>
+    <IncludePath>..\OOTAssignment\Include\TTF\include;..\OOTAssignment\Include\SDL\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Jaker\Documents\GitHub\OOTAssignment\Include\Include\SDL;..\SDKs\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jaker\Documents\GitHub\OOTAssignment\Include\TTF\include;C:\Users\Jaker\Documents\GitHub\OOTAssignment\Include\SDL\include;..\OOTAssignment\Include\TTF\include;..\OOTAssignment\Include\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>..\OOTAssignment\Include\Lib86;C:\Users\Jaker\Documents\GitHub\OOTAssignment\Include\Lib86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Jaker\Documents\GitHub\OOTAssignment\Include\TTF\lib\x86;C:\Users\Jaker\Documents\GitHub\OOTAssignment\Include\SDL\lib\x86;..\OOTAssignment\Include\TTF\lib\x86;..\OOTAssignment\Include\SDL\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
