@@ -19,13 +19,14 @@ int ParticleController::GetParticleNum()
 
 void ParticleController::SetParticleNum(int num)
 {
+	numberOfParticles = num;
 }
 
 void ParticleController::CreateParticles()
 {
 	for (size_t i = 0; i < numberOfParticles; i++)
 	{
-		Particle particle(renderer);
+		Particle particle(renderer, screenWidth, screenHeight);
 		allParticles.push_back(particle);
 	}
 	ChangeState(Standard);

@@ -86,7 +86,7 @@ int main(int argc, char* args[])
 			SDL_UpdateWindowSurface(window);	
 
 			//Create the particle controller to control the way the particles work and react
-			ParticleController pController(renderer);
+			ParticleController pController(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 			
 			//Set the initial number of particles
 			pController.SetParticleNum(2000);
