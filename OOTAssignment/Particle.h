@@ -1,9 +1,13 @@
 #pragma once
 
+#include <stdlib.h>
+
+#include "SDL.h"
+
 class Particle
 {
 	public:
-		Particle();
+		Particle(SDL_Renderer* rend, int sWidth, int sHeight);
 		~Particle();
 		int GetPosX();
 		int GetPosY();
@@ -12,6 +16,7 @@ class Particle
 		void DrawPixel();
 
 	private:
+		SDL_Renderer* renderer;
 		int xPos;
 		int yPos;
 };

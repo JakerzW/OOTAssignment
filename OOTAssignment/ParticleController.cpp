@@ -1,11 +1,15 @@
 #include "ParticleController.h"
 
-ParticleController::ParticleController()
+ParticleController::ParticleController(SDL_Renderer* rend, int sWidth, int sHeight)
 {
+	renderer = rend;
+	screenWidth = sWidth;
+	screenHeight = sHeight;
 }
 
 ParticleController::~ParticleController()
 {
+
 }
 
 int ParticleController::GetParticleNum()
@@ -17,36 +21,30 @@ void ParticleController::SetParticleNum(int num)
 {
 }
 
+void ParticleController::CreateParticles()
+{
+	for (size_t i = 0; i < numberOfParticles; i++)
+	{
+		Particle particle(renderer);
+		allParticles.push_back(particle);
+	}
+	ChangeState(Standard);
+}
+
 void ParticleController::ChangeState(State state)
 {
 	currentState = state;
 }
 
+State ParticleController::GetState()
+{
+	return currentState;
+}
+
 void ParticleController::DrawParticles()
 {
-	switch (currentState)
+	for (size_t i = 0; i < allParticles.size(); i++)
 	{
-		case Start:
-		{
-
-			ChangeState(Standard);
-			break;
-		}
-		case Standard:
-		{
-
-			break;
-		}
-		case Divided:
-		{
-
-
-			break;
-		}
-		case Colliding:
-		{
-
-			break;
-		}
+		allParticles.at(i).DrawPixel();
 	}
 }

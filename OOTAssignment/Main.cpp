@@ -85,13 +85,21 @@ int main(int argc, char* args[])
 			//Update the surface
 			SDL_UpdateWindowSurface(window);	
 
+			//Create the particle controller to control the way the particles work and react
+			ParticleController pController(renderer);
+			
+			//Set the initial number of particles
+			pController.SetParticleNum(2000);
+
+			//Create the particles now the number of particles is set
+			pController.CreateParticles();
+
 			//Set the boolean to check if the program should exit
 			bool ProgramActive = true;
 
 			//The main program procedure
 			while (ProgramActive)
 			{
-
 
 				SDL_Event inputEvent;
 
@@ -113,8 +121,9 @@ int main(int argc, char* args[])
 				
 				//Wait for input
 
-				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-				SDL_RenderDrawPoint(renderer, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+				pController.DrawParticles();
+
+				
 				SDL_RenderPresent(renderer);
 
 			}
