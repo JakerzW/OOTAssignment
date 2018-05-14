@@ -19,3 +19,18 @@ int Particle::GetPosY()
 {
 	return yPos;
 }
+
+void Particle::SetPosition(int x, int y)
+{
+
+}
+
+void Particle::SetColour(int r, int g, int b)
+{
+
+}
+
+void Particle::DrawPixel()
+{
+
+}

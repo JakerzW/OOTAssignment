@@ -3,7 +3,9 @@
 #include <stdio.h>
 #include <SDL_ttf.h>
 
-const int SCREEN_WIDTH = 800;
+#include "ParticleController.h"
+
+const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 600;
 const int SCREEN_POSX = 50;
 const int SCREEN_POSY = 50;
@@ -54,7 +56,7 @@ int main(int argc, char* args[])
 	else
 	{
 		//Create the window
-		window = SDL_CreateWindow("Particle Program", SCREEN_POSX, SCREEN_POSY, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+		window = SDL_CreateWindow("Particle Program", SCREEN_POSX, SCREEN_POSY, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
 		//Create the renderer
 		renderer = SDL_CreateRenderer(window, -1, 0);
@@ -106,6 +108,10 @@ int main(int argc, char* args[])
 				}
 
 				//Enter the program text
+
+				//Draw the current state of the program
+				
+				//Wait for input
 
 				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 				SDL_RenderDrawPoint(renderer, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
