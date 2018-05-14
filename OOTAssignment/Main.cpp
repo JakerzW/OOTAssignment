@@ -115,17 +115,18 @@ int main(int argc, char* args[])
 					}
 				}
 
-				//Enter the program text
+				//Clear the screen
+				SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+				SDL_RenderClear(renderer);
 
-				//Draw the current state of the program
-				
-				//Wait for input
-
+				//Perform particle functions
+				pController.MoveParticles();
 				pController.DrawParticles();
-
 				
+				//Render the screen
 				SDL_RenderPresent(renderer);
 
+				//Delay(0.1f);
 			}
 		}
 	}	

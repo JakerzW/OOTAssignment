@@ -13,12 +13,14 @@ class Particle
 		int GetPosY();
 		void SetPosition(int x, int y);
 		void SetColour(int r, int g, int b);
+		void MoveParticle();
 		void DrawPixel();
 
 	private:
 		SDL_Renderer* renderer;
-		int xPos;
-		int yPos;
+		int xPos, yPos;
+		int screenWidth, screenHeight;
+		int red, green, blue;
 };
 
 

@@ -42,6 +42,14 @@ State ParticleController::GetState()
 	return currentState;
 }
 
+void ParticleController::MoveParticles()
+{
+	for (size_t i = 0; i < allParticles.size(); i++)
+	{
+		allParticles.at(i).MoveParticle();
+	}
+}
+
 void ParticleController::DrawParticles()
 {
 	for (size_t i = 0; i < allParticles.size(); i++)
