@@ -140,14 +140,14 @@ int main(int argc, char* args[])
 	//Free the screen surface
 	SDL_FreeSurface(screenSurface);
 
-	//Free the text surface
+	/*//Free the text surface
 	//SDL_FreeSurface(textSurface);
 
 	//Destroy text texture
 	//SDL_DestroyTexture(textTexture);
 
 	//Close the font
-	//TTF_CloseFont(font);
+	//TTF_CloseFont(font);*/
 
 	//Destroy window
 	SDL_DestroyWindow(window);
