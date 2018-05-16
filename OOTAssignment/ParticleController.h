@@ -13,6 +13,8 @@ class ParticleController
 		~ParticleController();
 		int GetParticleNum();
 		void SetParticleNum(int num);
+		void IncreaseParticleNum();
+		void DecreaseParticleNum();
 		void CreateParticles();
 		void ChangeState(State state);
 		State GetState();
@@ -26,5 +28,4 @@ class ParticleController
 		int numberOfParticles;
 		State currentState;
 		int screenWidth, screenHeight;
-
 };

@@ -1,6 +1,8 @@
 #include <iostream>
-#include <SDL.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string>
+#include <SDL.h>
 #include <SDL_ttf.h>
 
 #include "ParticleController.h"
@@ -32,6 +34,13 @@ int main(int argc, char* args[])
 
 	//Defining the texture used to create the text
 	SDL_Texture* textTexture = NULL;	
+
+	//Declare time floats to calculate the fps
+	float lastTime, currentTime, deltaTime;
+	int currentFps;
+
+	//Value to store how many frames have passed;
+	int frames;
 
 	//Exit the program if SDL cannot be initialised
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -98,7 +107,7 @@ int main(int argc, char* args[])
 			//Create the particles now the number of particles is set
 			pController.CreateParticles();
 
-			//Define the rect to hold the text
+			//Define the rect to hold the text and FPS val
 			SDL_Rect textRect;
 			textRect.x = 10;
 			textRect.y = 10;
@@ -107,6 +116,14 @@ int main(int argc, char* args[])
 
 			//Initialise font colour
 			SDL_Color fontColour = { 0, 255, 255 };
+
+			//Initialise the time for calculating the fps
+			lastTime = 0;
+			currentTime = 0;
+			deltaTime = 0;
+			currentFps = 0;
+			frames = 0;
+
 
 			//Set the boolean to check if the program should exit
 			bool ProgramActive = true;
@@ -122,12 +139,44 @@ int main(int argc, char* args[])
 					switch (inputEvent.type)
 					{
 						case SDL_KEYDOWN:
-						{
-						case SDLK_ESCAPE:
-							ProgramActive = false;
+						{	
+							case SDLK_ESCAPE:
+							{
+								ProgramActive = false;
+								break;
+							}						
+							case SDLK_UP:
+							{
+								if (pController.GetParticleNum() < 10000)
+								{
+									pController.IncreaseParticleNum();
+									//Clear and create particles
+								}
+								break;
+							}
+							case SDLK_DOWN:
+							{
+								if (pController.GetParticleNum() > 2000)
+								{
+									pController.DecreaseParticleNum();
+									//Clear and create particles
+								}
+								break;
+							}							
 						}
 					}
 				}
+
+				//Calculate deltaTime for fps
+				currentTime = SDL_GetTicks();
+				deltaTime = currentTime - lastTime;
+				lastTime = currentTime;
+				currentFps = frames / (currentTime / 1000); 
+				
+				//Render fps text to screen
+				std::string fpsPrefix = "FPS: ";
+				std::string fpsText;
+				fpsText = fpsPrefix + std::to_string(currentFps);
 
 				//Clear the screen
 				SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -138,7 +187,7 @@ int main(int argc, char* args[])
 				pController.DrawParticles();
 
 				//Draw the text
-				textSurface = TTF_RenderText_Solid(font, "FPS: 60", fontColour);
+				textSurface = TTF_RenderText_Solid(font, fpsText.c_str(), fontColour);
 				textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
 				SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
 				
@@ -148,6 +197,9 @@ int main(int argc, char* args[])
 				
 				//Render the screen
 				SDL_RenderPresent(renderer);
+
+				//Update the number of frames
+				frames++;
 
 				//Delay(0.1f);
 			}

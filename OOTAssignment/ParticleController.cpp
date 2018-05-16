@@ -5,6 +5,8 @@ ParticleController::ParticleController(SDL_Renderer* rend, int sWidth, int sHeig
 	renderer = rend;
 	screenWidth = sWidth;
 	screenHeight = sHeight;
+
+	
 }
 
 ParticleController::~ParticleController()
@@ -20,6 +22,16 @@ int ParticleController::GetParticleNum()
 void ParticleController::SetParticleNum(int num)
 {
 	numberOfParticles = num;
+}
+
+void ParticleController::IncreaseParticleNum()
+{
+	numberOfParticles += 1000;
+}
+
+void ParticleController::DecreaseParticleNum()
+{
+	numberOfParticles -= 1000;
 }
 
 void ParticleController::CreateParticles()
