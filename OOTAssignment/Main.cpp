@@ -194,10 +194,6 @@ int main(int argc, char* args[])
 				textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
 				SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
 				
-
-
-
-				
 				//Render the screen
 				SDL_RenderPresent(renderer);
 
