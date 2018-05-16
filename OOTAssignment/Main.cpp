@@ -140,29 +140,32 @@ int main(int argc, char* args[])
 					{
 						case SDL_KEYDOWN:
 						{	
-							case SDLK_ESCAPE:
-							{
-								ProgramActive = false;
-								break;
-							}						
-							case SDLK_UP:
-							{
-								if (pController.GetParticleNum() < 10000)
+							switch (inputEvent.key.keysym.sym)
+							{								
+								case SDLK_UP:
 								{
-									pController.IncreaseParticleNum();
-									//Clear and create particles
+									if (pController.GetParticleNum() < 10000)
+									{
+										pController.IncreaseParticleNum();
+										pController.CreateParticles();
+									}
+									break;
 								}
-								break;
+								case SDLK_DOWN:
+								{
+									if (pController.GetParticleNum() > 2000)
+									{
+										pController.DecreaseParticleNum();
+										pController.CreateParticles();
+									}
+									break;
+								}
+								case SDLK_ESCAPE:
+								{
+									ProgramActive = false;
+									break;
+								}
 							}
-							case SDLK_DOWN:
-							{
-								if (pController.GetParticleNum() > 2000)
-								{
-									pController.DecreaseParticleNum();
-									//Clear and create particles
-								}
-								break;
-							}							
 						}
 					}
 				}

@@ -36,6 +36,7 @@ void ParticleController::DecreaseParticleNum()
 
 void ParticleController::CreateParticles()
 {
+	allParticles.clear();
 	for (size_t i = 0; i < numberOfParticles; i++)
 	{
 		Particle particle(renderer, screenWidth, screenHeight);
