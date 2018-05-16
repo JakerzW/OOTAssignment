@@ -22,23 +22,16 @@ int main(int argc, char* args[])
 	SDL_Renderer* renderer = NULL;
 
 	//Defining the surface contained by the window
-	SDL_Surface* screenSurface = NULL;	
-	
-	/*//Defining surface to hold text
+	SDL_Surface* screenSurface = NULL;		
+
+	//Initialise the font
+	TTF_Font* font = NULL;	
+
+	//Defining surface to hold text
 	SDL_Surface* textSurface = NULL;
 
 	//Defining the texture used to create the text
-	SDL_Texture* textTexture = NULL;
-
-	//Defining the font used throughout the program
-	TTF_Font* font = TTF_OpenFont("Arial.ttf", 25);
-
-	//Defining the font colour
-	SDL_Color fontBGColour = { 255, 255, 255 };
-	SDL_Color fontFGColour = { 0, 0, 255 };
-
-	textSurface = TTF_RenderText_Shaded(font, "This is my text.", fontFGColour, fontFGColour);
-	SDL_Rect textLocation = { 50, 50, 0, 0 }; */
+	SDL_Texture* textTexture = NULL;	
 
 	//Exit the program if SDL cannot be initialised
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -61,6 +54,9 @@ int main(int argc, char* args[])
 		//Create the renderer
 		renderer = SDL_CreateRenderer(window, -1, 0);
 
+		//Set the font
+		font = TTF_OpenFont("../Include/Fonts/arial.ttf", 25);
+
 		//If the window fails to be created, exit the program
 		if (window == NULL)
 		{
@@ -68,9 +64,17 @@ int main(int argc, char* args[])
 			return -1;
 		}
 
-		if (renderer == NULL)
+		//Exit if the Renderer fails to be created
+		else if (renderer == NULL)
 		{
 			std::cout << "Renderer could not be created." << std::endl;
+			return -1;
+		}
+
+		//Exit if the font does not exist
+		else if (font == NULL)
+		{
+			std::cout << "Could not get font" << std::endl << TTF_GetError();
 			return -1;
 		}
 
@@ -93,6 +97,16 @@ int main(int argc, char* args[])
 
 			//Create the particles now the number of particles is set
 			pController.CreateParticles();
+
+			//Define the rect to hold the text
+			SDL_Rect textRect;
+			textRect.x = 10;
+			textRect.y = 10;
+			textRect.w = 50;
+			textRect.h = 25;
+
+			//Initialise font colour
+			SDL_Color fontColour = { 0, 255, 255 };
 
 			//Set the boolean to check if the program should exit
 			bool ProgramActive = true;
@@ -122,6 +136,15 @@ int main(int argc, char* args[])
 				//Perform particle functions
 				pController.MoveParticles();
 				pController.DrawParticles();
+
+				//Draw the text
+				textSurface = TTF_RenderText_Solid(font, "FPS: 60", fontColour);
+				textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+				SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
+				
+
+
+
 				
 				//Render the screen
 				SDL_RenderPresent(renderer);
