@@ -24,12 +24,18 @@
     <ClCompile Include="ParticleController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Divisions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Particle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ParticleController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Divisions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
