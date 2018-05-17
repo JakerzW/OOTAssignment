@@ -107,14 +107,31 @@ void ParticleController::DivideParticles()
 {	
 	for (size_t i = 0; i < numberOfDivisions; i++)
 	{
-		for (size_t i = 0; i < allParticles.size(); i++)
+		for (size_t j = 0; j < allParticles.size(); j++)
 		{
 			//Check the particle against the current division
-			//If it fits into the division, push the particle into the respective vector and remove from the allParticles vector
-			//If it doesn't do nothing and move on
+			if (divisionBoundaries[i].IsWithinBoundaries(&allParticles[j]))
+			{
+				//If it fits into the division, push the particle into the respective vector and remove from the allParticles vector
+				dividedParticles[i].push_back(allParticles[j]);
+			}
 		}
 	}
-	//Clear the allParticles vector (check if it is empty, if not -> report error
+	ChangeState(Divided);
+}
+
+void ParticleController::DrawDivisions()
+{
+	//Set line colour
+	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+	//Y divide
+	SDL_RenderDrawLine(renderer, 0, yDivide, screenWidth, yDivide);
+	//X divide 1
+	SDL_RenderDrawLine(renderer, xDivide1, 0, xDivide1, screenHeight);
+	//X divide 2
+	SDL_RenderDrawLine(renderer, xDivide2, 0, xDivide2, screenHeight);
+	//X divide 3
+	SDL_RenderDrawLine(renderer, xDivide3, 0, xDivide3, screenHeight);
 }
 
 void ParticleController::DrawParticles()

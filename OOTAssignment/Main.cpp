@@ -160,6 +160,11 @@ int main(int argc, char* args[])
 									}
 									break;
 								}
+								case SDLK_SPACE:
+								{
+									pController.DivideParticles();
+									break;
+								}
 								case SDLK_ESCAPE:
 								{
 									ProgramActive = false;
@@ -185,9 +190,16 @@ int main(int argc, char* args[])
 				SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 				SDL_RenderClear(renderer);
 
+				if (pController.GetState() == Divided)
+				{
+					std::cout << "Particles divided cleanly" << std::endl;
+					pController.DrawDivisions();
+				}
+
 				//Perform particle functions
 				pController.MoveParticles();
 				pController.DrawParticles();
+
 
 				//Draw the text
 				textSurface = TTF_RenderText_Solid(font, fpsText.c_str(), fontColour);

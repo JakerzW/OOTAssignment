@@ -7,7 +7,7 @@ class Divisions
 	public:
 		Divisions();
 		~Divisions();
-		bool IsWithinBoundaries(Particle particle);
+		bool IsWithinBoundaries(Particle* particle);
 
 		int xMin;
 		int xMax;

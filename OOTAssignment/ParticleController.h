@@ -21,6 +21,7 @@ class ParticleController
 		State GetState();
 		void MoveParticles();
 		void DivideParticles();
+		void DrawDivisions();
 		void DrawParticles();
 
 		std::vector<Particle> allParticles;

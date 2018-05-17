@@ -12,6 +12,12 @@ Particle::Particle(SDL_Renderer* rend, int sWidth, int sHeight)
 	screenWidth = sWidth;
 	screenHeight = sHeight;
 
+	//Set movement boundaries
+	xMin = 0;
+	xMax = screenWidth;
+	yMin = 0;
+	yMax = screenHeight;
+
 	//Set random position
 	xPos = rand() % screenWidth + 1;
 	yPos = rand() % screenHeight + 1;
@@ -34,7 +40,16 @@ int Particle::GetPosY()
 
 void Particle::SetPosition(int x, int y)
 {
+	xPos = x;
+	yPos = y;
+}
 
+void Particle::SetBoundaries(int xMinVal, int xMaxVal, int yMinVal, int yMaxVal)
+{
+	xMin = xMaxVal;
+	xMax = xMaxVal;
+	yMin = yMinVal;
+	yMax = yMaxVal;
 }
 
 void Particle::SetColour(int r, int g, int b)
@@ -46,7 +61,6 @@ void Particle::SetColour(int r, int g, int b)
 
 void Particle::MoveParticle()
 {
-
 	bool particleMoved = false;
 	while (!particleMoved)
 	{
@@ -55,7 +69,7 @@ void Particle::MoveParticle()
 		{
 			case 1:
 			{
-				if (yPos > 0)
+				if (yPos > yMin)
 				{
 					yPos--;
 					particleMoved = true;
@@ -66,7 +80,7 @@ void Particle::MoveParticle()
 			}
 			case 2:
 			{
-				if (xPos < screenWidth)
+				if (xPos < xMax)
 				{
 					xPos++;
 					particleMoved = true;
@@ -77,7 +91,7 @@ void Particle::MoveParticle()
 			}
 			case 3: 
 			{
-				if (yPos < screenHeight)
+				if (yPos < yMax)
 				{
 					yPos++;
 					particleMoved = true;
@@ -89,7 +103,7 @@ void Particle::MoveParticle()
 			}
 			case 4:
 			{
-				if (xPos > 0)
+				if (xPos > xMin)
 				{
 					xPos--;
 					particleMoved = true;
