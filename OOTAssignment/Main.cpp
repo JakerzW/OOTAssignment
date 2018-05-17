@@ -238,9 +238,16 @@ int main(int argc, char* args[])
 					//std::cout << "Particles divided cleanly" << std::endl;
 					pController.DrawDivisions();
 				}
+				
 
 				//Perform particle functions
 				pController.MoveParticles();
+				
+				if (pController.GetState() == Colliding)
+				{
+					pController.CheckCollisions();
+				}
+
 				pController.DrawParticles();
 
 

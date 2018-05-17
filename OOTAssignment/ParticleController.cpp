@@ -144,24 +144,28 @@ void ParticleController::DivideParticles()
 void ParticleController::SetCollidingDivision(int division)
 {
 	divisionBoundaries[division].SetColliding();
+	ChangeState(Colliding);
 }
 
 void ParticleController::CheckCollisions()
 {
-	hashedParticles.ClearTable();
+	HashTable hashedParticles;
+	//bool firstParticle = true;
 	for (size_t i = 0; i < numberOfDivisions; i++)
 	{
 		if (divisionBoundaries[i].GetIsColliding())
 		{
 			for (size_t j = 0; j < dividedParticles[i].size(); j++)
 			{
-				if (hashedParticles.CheckCollision(dividedParticles[i][j].GetHashValue()))
+				if (hashedParticles.CheckCollision(dividedParticles[i][j].GetHashValue()) /*&& !firstParticle*/)
 				{
 					//delete particle
-					dividedParticles[i].erase.at(j);
+					std::cout << "Collision Detected" << std::endl;
+					dividedParticles[i].erase(dividedParticles[i].begin() + j);
 				}
 				else
 				{
+					//firstParticle = false;
 					hashedParticles.Insert(dividedParticles[i][j]);
 				}
 			}

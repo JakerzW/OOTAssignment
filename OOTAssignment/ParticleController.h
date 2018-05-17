@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <iostream>
 
 #include "SDL.h"
 #include "Particle.h"
@@ -29,7 +30,6 @@ class ParticleController
 
 		std::vector<Particle> allParticles;
 		std::vector<Particle> dividedParticles[8];
-		HashTable hashedParticles;
 
 	private:
 		SDL_Renderer* renderer;

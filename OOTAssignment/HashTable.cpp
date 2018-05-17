@@ -1,19 +1,36 @@
+#include <vector>
+
 #include "HashTable.h"
 
 HashTable::HashTable()
 {
-	tableSize = 103681;
+	tableSize = 12007;
+	table.clear();
+	for (size_t i = 0; i < tableSize; i++)
+	{
+		std::vector<Particle> temp;
+		table.push_back(temp);
+	}
 }
 
 HashTable::~HashTable()
 {
 }
 
-int HashTable::HashFunction(int key)
+unsigned int HashTable::HashFunction(int key)
 {
-	int hashedKey;
-	hashedKey = (key * (key + 3)) % 103681;
-	return hashedKey;
+	//int hashedKey;
+	//hashedKey = (key * (key + 3)) % 103681;
+	std::string h = std::to_string(key);
+	unsigned value = 0;
+	int i;
+
+	for (i = 0; i < h.length(); i++)
+	{
+		value ^= (value << 5) + (value >> 2) + h[i];
+	}
+
+	return value % tableSize;
 }
 
 bool HashTable::CheckCollision(int key)
