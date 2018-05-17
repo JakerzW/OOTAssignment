@@ -8,6 +8,8 @@ class Divisions
 		Divisions();
 		~Divisions();
 		bool IsWithinBoundaries(Particle* particle);
+		bool GetIsColliding();
+		void SetColliding();
 
 		int xMin;
 		int xMax;
@@ -15,5 +17,5 @@ class Divisions
 		int yMax;
 
 	private:
-
+		bool isColliding;
 };

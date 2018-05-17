@@ -4,6 +4,7 @@
 #include "SDL.h"
 #include "Particle.h"
 #include "Divisions.h"
+#include "HashTable.h"
 
 enum State { Start, Standard, Divided, Colliding };
 
@@ -21,11 +22,14 @@ class ParticleController
 		State GetState();
 		void MoveParticles();
 		void DivideParticles();
+		void SetCollidingDivision(int division);
+		void CheckCollisions();
 		void DrawDivisions();
 		void DrawParticles();
 
 		std::vector<Particle> allParticles;
 		std::vector<Particle> dividedParticles[8];
+		HashTable hashedParticles;
 
 	private:
 		SDL_Renderer* renderer;

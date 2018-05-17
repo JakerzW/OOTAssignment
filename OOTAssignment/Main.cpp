@@ -162,7 +162,50 @@ int main(int argc, char* args[])
 								}
 								case SDLK_SPACE:
 								{
-									pController.DivideParticles();
+									if (pController.GetState() == Standard)
+									{
+										pController.DivideParticles();
+									}
+									break;
+								}
+								case SDLK_1:
+								{
+									pController.SetCollidingDivision(0);
+									break;
+								}
+								case SDLK_2:
+								{
+									pController.SetCollidingDivision(1);
+									break;
+								}
+								case SDLK_3:
+								{
+									pController.SetCollidingDivision(2);
+									break;
+								}
+								case SDLK_4:
+								{
+									pController.SetCollidingDivision(3);
+									break;
+								}
+								case SDLK_5:
+								{
+									pController.SetCollidingDivision(4);
+									break;
+								}
+								case SDLK_6:
+								{
+									pController.SetCollidingDivision(5);
+									break;
+								}
+								case SDLK_7:
+								{
+									pController.SetCollidingDivision(6);
+									break;
+								}
+								case SDLK_8:
+								{
+									pController.SetCollidingDivision(7);
 									break;
 								}
 								case SDLK_ESCAPE:
@@ -190,9 +233,9 @@ int main(int argc, char* args[])
 				SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 				SDL_RenderClear(renderer);
 
-				if (pController.GetState() == Divided)
+				if (pController.GetState() == Divided || pController.GetState() == Colliding)
 				{
-					std::cout << "Particles divided cleanly" << std::endl;
+					//std::cout << "Particles divided cleanly" << std::endl;
 					pController.DrawDivisions();
 				}
 
@@ -212,7 +255,7 @@ int main(int argc, char* args[])
 				//Update the number of frames
 				frames++;
 
-				Delay(0.025f);
+				Delay(0.0125f);
 			}
 		}
 	}	

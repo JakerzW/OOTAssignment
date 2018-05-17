@@ -2,6 +2,7 @@
 
 Divisions::Divisions()
 {
+	isColliding = false;
 }
 
 Divisions::~Divisions()
@@ -19,4 +20,14 @@ bool Divisions::IsWithinBoundaries(Particle* particle)
 	{
 		return false;
 	}
+}
+
+bool Divisions::GetIsColliding()
+{
+	return isColliding;
+}
+
+void Divisions::SetColliding()
+{
+	isColliding = true;
 }

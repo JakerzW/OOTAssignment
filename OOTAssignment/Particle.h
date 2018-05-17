@@ -14,6 +14,7 @@ class Particle
 		void SetPosition(int x, int y);
 		void SetBoundaries(int xMinVal, int xMaxVal, int yMinVal, int yMaxVal);
 		void SetColour(int r, int g, int b);
+		int GetHashValue();
 		void MoveParticle();
 		void DrawPixel();
 
@@ -23,6 +24,7 @@ class Particle
 		int xMin, xMax, yMin, yMax;
 		int screenWidth, screenHeight;
 		int red, green, blue;
+		int hashValue;
 };
 
 

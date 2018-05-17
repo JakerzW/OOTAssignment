@@ -61,6 +61,12 @@ void Particle::SetColour(int r, int g, int b)
 	blue = b;
 }
 
+int Particle::GetHashValue()
+{
+	hashValue = (xPos + ((yPos - 1) * screenWidth));
+	return hashValue;
+}
+
 void Particle::MoveParticle()
 {
 	bool particleMoved = false;

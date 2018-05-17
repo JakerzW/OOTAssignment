@@ -77,6 +77,10 @@ void ParticleController::DecreaseParticleNum()
 void ParticleController::CreateParticles()
 {
 	allParticles.clear();
+	for (size_t i = 0; i < numberOfDivisions; i++)
+	{
+		dividedParticles[i].clear();
+	}
 	for (size_t i = 0; i < numberOfParticles; i++)
 	{
 		Particle particle(renderer, screenWidth, screenHeight);
@@ -97,24 +101,27 @@ State ParticleController::GetState()
 
 void ParticleController::MoveParticles()
 {
-	/*if (currentState == Standard)
-	{*/
+	/*for (size_t i = 0; i < allParticles.size(); i++)
+	{
+		allParticles.at(i).MoveParticle();
+	}*/
+	if (currentState == Standard)
+	{
 		for (size_t i = 0; i < allParticles.size(); i++)
 		{
 			allParticles.at(i).MoveParticle();
 		}
-	/*}
+	}
 	if (currentState == Divided)
 	{
- 		for (size_t i = 0; i < numberOfDivisions; i++)
+		for (size_t i = 0; i < numberOfDivisions; i++)
 		{
 			for (size_t j = 0; j < dividedParticles[i].size(); j++)
 			{
 				dividedParticles[i][j].MoveParticle();
 			}
 		}
-	}*/
-	
+	}
 }
 
 void ParticleController::DivideParticles()
@@ -134,6 +141,34 @@ void ParticleController::DivideParticles()
 	ChangeState(Divided);
 }
 
+void ParticleController::SetCollidingDivision(int division)
+{
+	divisionBoundaries[division].SetColliding();
+}
+
+void ParticleController::CheckCollisions()
+{
+	hashedParticles.ClearTable();
+	for (size_t i = 0; i < numberOfDivisions; i++)
+	{
+		if (divisionBoundaries[i].GetIsColliding())
+		{
+			for (size_t j = 0; j < dividedParticles[i].size(); j++)
+			{
+				if (hashedParticles.CheckCollision(dividedParticles[i][j].GetHashValue()))
+				{
+					//delete particle
+					dividedParticles[i].erase.at(j);
+				}
+				else
+				{
+					hashedParticles.Insert(dividedParticles[i][j]);
+				}
+			}
+		}
+	}
+}
+
 void ParticleController::DrawDivisions()
 {
 	//Set line colour
@@ -150,8 +185,25 @@ void ParticleController::DrawDivisions()
 
 void ParticleController::DrawParticles()
 {
-	for (size_t i = 0; i < allParticles.size(); i++)
+	/*for (size_t i = 0; i < allParticles.size(); i++)
 	{
 		allParticles.at(i).DrawPixel();
+	}*/
+	if (currentState == Standard)
+	{
+		for (size_t i = 0; i < allParticles.size(); i++)
+		{
+			allParticles.at(i).DrawPixel();
+		}
+	}
+	if (currentState == Divided)
+	{
+		for (size_t i = 0; i < numberOfDivisions; i++)
+		{
+			for (size_t j = 0; j < dividedParticles[i].size(); j++)
+			{
+				dividedParticles[i][j].DrawPixel();
+			}
+		}
 	}
 }
