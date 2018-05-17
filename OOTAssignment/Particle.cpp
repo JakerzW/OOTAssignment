@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Particle.h"
 
 Particle::Particle(SDL_Renderer* rend, int sWidth, int sHeight)
@@ -46,7 +48,7 @@ void Particle::SetPosition(int x, int y)
 
 void Particle::SetBoundaries(int xMinVal, int xMaxVal, int yMinVal, int yMaxVal)
 {
-	xMin = xMaxVal;
+	xMin = xMinVal;
 	xMax = xMaxVal;
 	yMin = yMinVal;
 	yMax = yMaxVal;
@@ -80,11 +82,11 @@ void Particle::MoveParticle()
 			}
 			case 2:
 			{
-				if (xPos < xMax)
+ 				if (xPos < xMax)
 				{
 					xPos++;
 					particleMoved = true;
-					break;
+					break; 
 				}
 				else
 					continue;

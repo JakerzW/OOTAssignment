@@ -212,7 +212,7 @@ int main(int argc, char* args[])
 				//Update the number of frames
 				frames++;
 
-				//Delay(0.1f);
+				Delay(0.025f);
 			}
 		}
 	}	

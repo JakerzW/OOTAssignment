@@ -97,10 +97,24 @@ State ParticleController::GetState()
 
 void ParticleController::MoveParticles()
 {
-	for (size_t i = 0; i < allParticles.size(); i++)
+	/*if (currentState == Standard)
+	{*/
+		for (size_t i = 0; i < allParticles.size(); i++)
+		{
+			allParticles.at(i).MoveParticle();
+		}
+	/*}
+	if (currentState == Divided)
 	{
-		allParticles.at(i).MoveParticle();
-	}
+ 		for (size_t i = 0; i < numberOfDivisions; i++)
+		{
+			for (size_t j = 0; j < dividedParticles[i].size(); j++)
+			{
+				dividedParticles[i][j].MoveParticle();
+			}
+		}
+	}*/
+	
 }
 
 void ParticleController::DivideParticles()
