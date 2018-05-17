@@ -27,7 +27,7 @@ bool Divisions::GetIsColliding()
 	return isColliding;
 }
 
-void Divisions::SetColliding()
+void Divisions::SetColliding(bool value)
 {
-	isColliding = true;
+	isColliding = value;
 }

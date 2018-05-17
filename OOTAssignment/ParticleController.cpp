@@ -81,6 +81,7 @@ void ParticleController::CreateParticles()
 	for (size_t i = 0; i < numberOfDivisions; i++)
 	{
 		dividedParticles[i].clear();
+		divisionBoundaries[i].SetColliding(false);
 	}
 	for (size_t i = 0; i < numberOfParticles; i++)
 	{
@@ -147,7 +148,7 @@ void ParticleController::DivideParticles()
 
 void ParticleController::SetCollidingDivision(int division)
 {
-	divisionBoundaries[division].SetColliding();
+	divisionBoundaries[division].SetColliding(true);
 	ChangeState(Colliding);
 }
 

@@ -9,7 +9,7 @@ class Divisions
 		~Divisions();
 		bool IsWithinBoundaries(Particle* particle);
 		bool GetIsColliding();
-		void SetColliding();
+		void SetColliding(bool value);
 
 		int xMin;
 		int xMax;
