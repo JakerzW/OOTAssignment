@@ -112,7 +112,7 @@ void ParticleController::MoveParticles()
 			allParticles.at(i).MoveParticle();
 		}
 	}
-	if (currentState == Divided)
+	if (currentState == Divided || currentState == Colliding)
 	{
 		for (size_t i = 0; i < numberOfDivisions; i++)
 		{
@@ -200,7 +200,7 @@ void ParticleController::DrawParticles()
 			allParticles.at(i).DrawPixel();
 		}
 	}
-	if (currentState == Divided)
+	if (currentState == Divided || currentState == Colliding)
 	{
 		for (size_t i = 0; i < numberOfDivisions; i++)
 		{

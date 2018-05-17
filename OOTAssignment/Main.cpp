@@ -237,8 +237,7 @@ int main(int argc, char* args[])
 				{
 					//std::cout << "Particles divided cleanly" << std::endl;
 					pController.DrawDivisions();
-				}
-				
+				}			
 
 				//Perform particle functions
 				pController.MoveParticles();
@@ -262,7 +261,7 @@ int main(int argc, char* args[])
 				//Update the number of frames
 				frames++;
 
-				Delay(0.0125f);
+				//Delay(0.0125f);
 			}
 		}
 	}	
