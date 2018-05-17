@@ -76,6 +76,7 @@ void ParticleController::DecreaseParticleNum()
 
 void ParticleController::CreateParticles()
 {
+	std::cout << "Create has been called" << std::endl;
 	allParticles.clear();
 	for (size_t i = 0; i < numberOfDivisions; i++)
 	{
@@ -126,6 +127,7 @@ void ParticleController::MoveParticles()
 
 void ParticleController::DivideParticles()
 {	
+	std::cout << "Divide has been called" << std::endl;
 	for (size_t i = 0; i < numberOfDivisions; i++)
 	{
 		for (size_t j = 0; j < allParticles.size(); j++)
@@ -134,10 +136,12 @@ void ParticleController::DivideParticles()
 			if (divisionBoundaries[i].IsWithinBoundaries(&allParticles[j]))
 			{
 				//If it fits into the division, push the particle into the respective vector and remove from the allParticles vector
+				//std::cout << "Particle Added To Divided Particles" << std::endl;
 				dividedParticles[i].push_back(allParticles[j]);
 			}
 		}
 	}
+	allParticles.clear();
 	ChangeState(Divided);
 }
 
@@ -162,6 +166,7 @@ void ParticleController::CheckCollisions()
 					//delete particle
 					std::cout << "Collision Detected" << std::endl;
 					dividedParticles[i].erase(dividedParticles[i].begin() + j);
+					std::cout << "Number of Particles: " << CountParticles() << std::endl;
 				}
 				else
 				{
@@ -187,12 +192,22 @@ void ParticleController::DrawDivisions()
 	SDL_RenderDrawLine(renderer, xDivide3, 0, xDivide3, screenHeight);
 }
 
+int ParticleController::CountParticles()
+{
+	int numOfParticles = 0;
+	//std::cout << "Count set to 0" << std::endl;
+	for (size_t i = 0; i < numberOfDivisions; i++)
+	{
+		for (size_t j = 0; j < dividedParticles[i].size(); j++)
+		{
+			numOfParticles++;
+		}
+	}
+	return numOfParticles;
+}
+
 void ParticleController::DrawParticles()
 {
-	/*for (size_t i = 0; i < allParticles.size(); i++)
-	{
-		allParticles.at(i).DrawPixel();
-	}*/
 	if (currentState == Standard)
 	{
 		for (size_t i = 0; i < allParticles.size(); i++)

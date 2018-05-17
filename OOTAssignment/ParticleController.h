@@ -26,6 +26,7 @@ class ParticleController
 		void SetCollidingDivision(int division);
 		void CheckCollisions();
 		void DrawDivisions();
+		int CountParticles();
 		void DrawParticles();
 
 		std::vector<Particle> allParticles;

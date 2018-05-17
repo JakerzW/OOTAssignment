@@ -140,6 +140,7 @@ int main(int argc, char* args[])
 					{
 						case SDL_KEYDOWN:
 						{	
+							std::cout << "Key Pressed" << std::endl;
 							switch (inputEvent.key.keysym.sym)
 							{								
 								case SDLK_UP:
