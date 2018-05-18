@@ -1,0 +1,5 @@
+- Press the Up and Down Arrows to control the number of particles from 2000 to 10000 in 1000 increments
+- Press the Spacebar to divide the particles
+- Once they are divided, press a number through 1-8 to start the collision in that division
+- To restart, press the Up or Down arrow to reselect a new number of particles and start again
+- Press Escape to exit the program
